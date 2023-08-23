@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+//백준 18111 마인크래프트
+
 typedef struct
 {
     int height;

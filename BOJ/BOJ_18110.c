@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-//백준 18110
+//백준 18110 solved.ac
 int roundOff (double num);
 int compare (const void *a, const void *b);
 int getDifficulty (int n, int *scoreArray);

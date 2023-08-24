@@ -48,6 +48,8 @@ int main(void)
         }
         printf("%d\n",getPrintOrder(N, target, &q));
     }
+    free(q.queue);
+    return 0;
 }
 
 int getPrintOrder (int N, int target, queue *q)

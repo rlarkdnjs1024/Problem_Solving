@@ -56,6 +56,25 @@ void insertFirst (list *p, data element)
     p->size++;
 }
 
+void insertLast (list *p, data element)
+{
+    listNode *temp = (listNode *)malloc(sizeof(listNode));
+    if (p->headAdrs == NULL) //리스트가 비어 있었을 떄
+    {
+        temp->element = element;
+        temp->next = NULL;
+        p->headAdrs = temp;
+        p->lastAdrs = temp;
+       
+    }
+    else
+    {
+        temp->element = element;
+        temp->next = NULL;
+        p->lastAdrs->next = temp;
+    }
+}
+
 void deleteFirst (list *p)
 {
     listNode *temp;
@@ -109,6 +128,9 @@ int main(void)
     printList(&a);
     
     insertFirst(&a, 50);
+    printList(&a);
+    
+    insertLast(&a, 70);
     printList(&a);
     
     return 0;

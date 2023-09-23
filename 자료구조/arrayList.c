@@ -19,7 +19,7 @@ void initList (list *p) //리스트 구조체를 초기화한다.
     p->size = 1;
 }
 
-void insert (list *p, data element) //맨 뒤에 요소를 삽입한다.
+void insertLast (list *p, data element) //맨 뒤에 요소를 삽입한다.
 {
     if (p->rear == p->size - 1)
     {
@@ -31,7 +31,42 @@ void insert (list *p, data element) //맨 뒤에 요소를 삽입한다.
     p->array[++p->rear] = element;
 }
 
-void delete (list *p, data element)
+void insert (list *p, int index, data element)
+{
+    if ( index > p->rear || index < 0)
+    {
+        printf("해당위치에 원소를 넣을 수 없습니다.\n");
+        return;
+    }
+    
+    else  if (p->rear == p->size - 1)
+    {
+        p->size *= 2;
+        p->array = (data *)realloc(p->array, sizeof(data) * p->size);
+        if (p->array == NULL)
+            exit(1);
+    }
+    
+    for ( int i = p->rear; i >= index; i--)
+        p->array[i+1] = p->array[i];
+    p->array[index] = element;
+    p->rear++;
+}
+
+void delete (list *p, int index)
+{
+    if ( index > p->rear || index < 0)
+    {
+        printf("해당 위치에서 원소를 삭제할 수 없습니다.\n");
+        return;
+    }
+    
+    for ( int i = index + 1; i <= p->rear; i++)
+        p->array[i-1] = p->array[i];
+    p->rear--;
+}
+
+void deleteLast (list *p, data element)
 {
     p->rear--;
 }
@@ -55,18 +90,27 @@ int main(void)
     list myList;
     
     initList(&myList);
-    insert(&myList, 1);
-    insert(&myList, 2);
-    insert(&myList, 3);
-    insert(&myList, 4);
-    insert(&myList, 5);
-    insert(&myList, 10);
     
+    insertLast(&myList, 1);
     printList(&myList);
+    
+    insertLast(&myList, 2);
+    printList(&myList);
+    
+    insertLast(&myList, 3);
+    printList(&myList);
+    
+    insert(&myList, 0, 5);
+    printList(&myList);
+    
+    delete(&myList, 1);
+    printList(&myList);
+    
     
     free(myList.array);
     return 0;
 }
+
 
 
 
